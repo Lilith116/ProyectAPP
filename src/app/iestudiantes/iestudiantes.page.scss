@@ -1,0 +1,51 @@
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .logo {
+    width: 180px;
+  }
+  
+  ion-button {
+    margin-top: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+  }
+  
+  ion-content {
+    background-color: #121212;
+  }
+  
+  
+  #container a {
+    text-decoration: none;
+  }
+  ion-content {
+    --ion-background-color: #121212; 
+  }
+  
+  .volver-boton {
+    margin-top: 10px;
+    margin-bottom: 15px; 
+  }
+  
+  .logo-container {
+    text-align: center;
+    margin-top: 10px; 
+  }
+  
+  .logo {
+    max-width: 150px;
+    margin: 5px 0;
+  }
+  
+  form {
+    margin-top: 10px; 
+  }
+  
+  ion-card {
+    --padding-start: 0;
+    --padding-end: 0;
+  }

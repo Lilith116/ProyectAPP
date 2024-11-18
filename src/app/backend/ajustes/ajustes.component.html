@@ -1,0 +1,206 @@
+<p>
+  ajustes works!
+</p>
+<!--
+<div>
+  <h2>Crear Docente</h2>
+  <form [formGroup]="docenteForm" (ngSubmit)="crearDocente()">
+    <label>Email:</label>
+    <input formControlName="email" type="email" />
+    <div *ngIf="docenteForm.controls['email'].invalid && docenteForm.controls['email'].touched">
+      El email es requerido y debe ser válido.
+    </div>
+
+    <label>Nombre:</label>
+    <input formControlName="name" type="text" />
+    <div *ngIf="docenteForm.controls['name'].invalid && docenteForm.controls['name'].touched">
+      El nombre es requerido.
+    </div>
+
+    <label>Contraseña:</label>
+    <input formControlName="password" type="password" />
+    <div *ngIf="docenteForm.controls['password'].invalid && docenteForm.controls['password'].touched">
+      La contraseña debe tener al menos 4 caracteres.
+    </div>
+
+    <button type="submit" [disabled]="docenteForm.invalid">Crear Docente</button>
+  </form>
+</div>
+
+<div>
+  <h2>Crear Estudiante</h2>
+  <form [formGroup]="estudianteForm" (ngSubmit)="crearEstudiante()">
+    <label>Email:</label>
+    <input formControlName="email" type="email" />
+    <div *ngIf="estudianteForm.controls['email'].invalid && estudianteForm.controls['email'].touched">
+      El email es requerido y debe ser válido.
+    </div>
+
+    <label>Nombre:</label>
+    <input formControlName="name" type="text" />
+    <div *ngIf="estudianteForm.controls['name'].invalid && estudianteForm.controls['name'].touched">
+      El nombre es requerido.
+    </div>
+
+    <label>Contraseña:</label>
+    <input formControlName="password" type="password" />
+    <div *ngIf="estudianteForm.controls['password'].invalid && estudianteForm.controls['password'].touched">
+      La contraseña debe tener al menos 4 caracteres.
+    </div>
+
+    <button type="submit" [disabled]="estudianteForm.invalid">Crear Estudiante</button>
+  </form>
+</div>
+
+-->
+
+
+<form [formGroup]="registerForm" (ngSubmit)="register()">
+  <label>Tipo de Usuario:</label>
+  <select formControlName="userType">
+    <option value="docente">Docente</option>
+    <option value="estudiante">Estudiante</option>
+  </select>
+
+  <label>Email:</label>
+  <input formControlName="email" type="email" />
+
+  <label>Nombre:</label>
+  <input formControlName="name" type="text" />
+
+  <label>Contraseña:</label>
+  <input formControlName="password" type="password" />
+
+  <button type="submit" [disabled]="registerForm.invalid">Registrar</button>
+</form>
+
+
+
+<form [formGroup]="resetForm" (ngSubmit)="resetPassword()">
+  <label for="email">Correo Electrónico:</label>
+  <input formControlName="email" type="email" id="email" />
+
+  <div *ngIf="resetForm.controls['email'].invalid && resetForm.controls['email'].touched">
+    <p>Por favor, ingresa un correo válido.</p>
+  </div>
+
+  <button type="submit" [disabled]="resetForm.invalid">Restablecer Contraseña</button>
+</form>
+
+
+<div>
+  <h2>Administración de Usuarios</h2>
+
+  <!-- Botones para cambiar entre vistas -->
+  <button (click)="loadDocentes()">Ver Docentes</button>
+  <button (click)="loadEstudiantes()">Ver Estudiantes</button>
+
+  <!-- Lista de Docentes -->
+  <div *ngIf="currentView === 'docentes'">
+    <h3>Lista de Docentes</h3>
+    <ul>
+      <li *ngFor="let docente of docentes">
+        {{ docente.name }} ({{ docente.email }})
+      </li>
+    </ul>
+  </div>
+
+  <!-- Lista de Estudiantes -->
+  <div *ngIf="currentView === 'estudiantes'">
+    <h3>Lista de Estudiantes</h3>
+    <ul>
+      <li *ngFor="let estudiante of estudiantes">
+        {{ estudiante.name }} ({{ estudiante.email }})
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div>
+  <!-- Lista de usuarios -->
+  <div *ngIf="currentView === 'docentes'">
+    <h2>Docentes</h2>
+    <ul>
+      <li *ngFor="let docente of docentes">
+        {{ docente.name }} - {{ docente.email }}
+        <button (click)="editUser(docente)">Editar</button>
+        <button (click)="removeDocente(docente.id)">Eliminar</button>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="currentView === 'estudiantes'">
+    <h2>Estudiantes</h2>
+    <ul>
+      <li *ngFor="let estudiante of estudiantes">
+        {{ estudiante.name }} - {{ estudiante.email }}
+        <button (click)="editUser(estudiante)">Editar</button>
+        <button (click)="removeEstudiante(estudiante.id)">Eliminar</button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Formulario -->
+  <form [formGroup]="registerForm" (ngSubmit)="saveUser()">
+    <h3 *ngIf="!isEditMode">Registrar Usuario</h3>
+    <h3 *ngIf="isEditMode">Editar Usuario</h3>
+    <label>
+      Tipo de Usuario:
+      <select formControlName="userType">
+        <option value="docente">Docente</option>
+        <option value="estudiante">Estudiante</option>
+      </select>
+    </label>
+    <label>
+      Nombre:
+      <input type="text" formControlName="name" />
+    </label>
+    <label>
+      Correo Electrónico:
+      <input type="email" formControlName="email" />
+    </label>
+    <label *ngIf="!isEditMode">
+      Contraseña:
+      <input type="password" formControlName="password" />
+    </label>
+    <button type="submit">{{ isEditMode ? 'Guardar Cambios' : 'Registrar' }}</button>
+    <button type="button" (click)="resetFormState()" *ngIf="isEditMode">Cancelar</button>
+  </form>
+</div>
+
+
+
+
+<div>
+  <h2>Eliminacion de Usuarios</h2>
+
+  <!-- Botones para cambiar entre vistas -->
+  <button (click)="loadDocentes()">Ver Docentes</button>
+  <button (click)="loadEstudiantes()">Ver Estudiantes</button>
+
+  <!-- Lista de Docentes -->
+  <div *ngIf="currentView === 'docentes'">
+    <h3>Lista de Docentes</h3>
+    <ul>
+      <li *ngFor="let docente of docentes">
+        {{ docente.name }} ({{ docente.email }})
+        <button (click)="removeDocente(docente.id)">Eliminar</button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Lista de Estudiantes -->
+  <div *ngIf="currentView === 'estudiantes'">
+    <h3>Lista de Estudiantes</h3>
+    <ul>
+      <li *ngFor="let estudiante of estudiantes">
+        {{ estudiante.name }} ({{ estudiante.email }})
+        <button (click)="removeEstudiante(estudiante.id)">Eliminar</button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+
+
+

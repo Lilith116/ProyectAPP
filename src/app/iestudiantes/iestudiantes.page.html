@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ingreso Alumno </ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-button expand="block" (click)="navigateToHome()" class="volver-boton">
+    Volver a Inicio
+  </ion-button>
+
+  <div class="logo-container">
+    <img src="assets/RegistrAPP.png" alt="RegistrAPP logo" class="logo">
+  </div>
+  <div class="logo-container">
+    <img src="assets/duoc-logo.png" alt="Duoc UC Logo" class="logo">
+  </div>
+  
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input [(ngModel)]="email" [ngModelOptions]="{ standalone: true }" type="email" placeholder=""></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input [(ngModel)]="password" [ngModelOptions]="{ standalone: true }" type="password" placeholder=""></ion-input>
+      </ion-item>
+      <ion-button expand="block" color="dark" (click)="navigateTorestorepassword()">Recuperar Contraseña</ion-button>
+      <ion-button expand="block" color="dark" (click)="login()" >Ingresar</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

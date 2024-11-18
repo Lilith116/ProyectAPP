@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Crear QR</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="qrForm" (ngSubmit)="generateQRCode()">
+    <ion-item>
+      <ion-label position="floating">Nombre del Curso</ion-label>
+      <ion-input formControlName="courseName" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Sección</ion-label>
+      <ion-input formControlName="section" type="text"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" color="primary" type="submit" [disabled]="qrForm.invalid">
+      Generar QR
+    </ion-button>
+  </form>
+
+  <!-- Mostrar el QR generado -->
+  <div *ngIf="qrCodeUrl" class="qr-container">
+    <h2>QR Generado</h2>
+    <img [src]="qrCodeUrl" alt="Código QR" style="width: 100%; max-width: 300px;" />
+  </div>
+</ion-content>

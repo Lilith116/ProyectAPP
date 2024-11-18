@@ -1,20 +1,41 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>RegistrAPP</ion-title>
+    <ion-buttons slot="end">
+      <div style="display: flex; align-items: center; gap: 10px;">
+      <!-- Mostrar el nombre del usuario -->
+      <ion-card-title>Bienvenido, {{ userName || 'Invitado' }}</ion-card-title>
+
+      <!-- Botón para cerrar sesión -->
+      <ion-button color="danger" (click)="logout()">Cerrar sesión</ion-button>
+      </div>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content class="ion-padding">
+  <div class="logo-container">
+    <img src="assets/RegistrAPP.png" alt="RegistrAPP logo" class="logo">
   </div>
+  <ion-content class="ion-padding">
+    <div class="logo-container">
+      <img src="assets/duoc-logo.png" alt="Duoc UC Logo" class="logo">
+    </div>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-md="3" class="ion-text-center">
+        <ion-button expand="block" color="dark" (click)="navigateTocestudiantes()" >Crear Alumno</ion-button>
+        <ion-button expand="block" color="dark" (click)="navigateToiestudiantes()">Ingreso Alumno</ion-button>
+        <ion-button expand="block" color="dark" (click)="navigateToidocentes()" >Ingreso Docente</ion-button>
+        <ion-button expand="block"  color="dark"  [disabled]="userRole !== 'docente'" (click)="navigateTocdocentes()">Creacion Docente</ion-button>
+        <ion-button expand="block" color="primary" routerLink="/ajustes" [disabled]="userRole !== 'docente'" *ngIf="userRole === 'docente'">Acceder al CRUD (Ajustes)</ion-button>
+        <ion-button expand="block" color="dark" routerLink="/scanner"[disabled]="userRole !== 'estudiante'" *ngIf="userRole === 'estudiante'">Escanear QR </ion-button>
+        <ion-button expand="block" color="primary" routerLink="/crear-qr" [disabled]="userRole !== 'docente'" *ngIf="userRole === 'docente'">Crear QR</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div class="iframe-container">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d106472.46955499696!2d-70.67356481739525!3d-33.494490376396314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662d00be4a5fa81%3A0xcd8eaf5b1d547f64!2sDuoc%20UC%3A%20Sede%20San%20Joaqu%C3%ADn!5e0!3m2!1ses-419!2scl!4v1731699510398!5m2!1ses-419!2scl" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
 </ion-content>
